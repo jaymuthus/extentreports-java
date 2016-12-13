@@ -32,7 +32,7 @@ import com.relevantcodes.extentreports.model.TestAttribute;
  * @author Anshoo
  *
  */
-class DBReporter extends LogSettings implements IReporter {
+public class DBReporter extends LogSettings implements IReporter {
     static final Logger logger = Logger.getLogger(LogSettings.class.getName()); 
     
     private boolean isReady = false;

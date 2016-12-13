@@ -34,7 +34,7 @@ import com.relevantcodes.extentreports.model.TestAttribute;
 import com.relevantcodes.extentreports.utils.DateTimeUtil;
 
 // Report abstract
-abstract class Report extends LogSettings implements Serializable {
+public abstract class Report extends LogSettings implements Serializable {
 
     private static final long serialVersionUID = 888931414131302753L;
     
