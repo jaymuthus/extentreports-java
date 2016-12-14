@@ -248,20 +248,20 @@ public abstract class Report extends LogSettings implements Serializable {
         }
     }
     
-    protected List<LogStatus> getLogStatusList() {
+    public List<LogStatus> getLogStatusList() {
         return logStatusList;
     }
     
-    protected Date getStartedTime() {
+    public Date getStartedTime() {
         return startedTime;
     }
     
-    protected String getRunDuration() {
+    public String getRunDuration() {
         currentSuiteRunDuration = DateTimeUtil.getDiff(Calendar.getInstance().getTime(), new Date(suiteTimeInfo.getSuiteStartTimestamp()));
         return currentSuiteRunDuration;
     }
     
-    protected String getRunDurationOverall() {
+    public String getRunDurationOverall() {
         if (totalDurationPastRun == 0) {
             if (currentSuiteRunDuration == null) {
                 getRunDuration();
@@ -281,27 +281,27 @@ public abstract class Report extends LogSettings implements Serializable {
         return DateTimeUtil.getHMS(hours, mins, secs, millis);
     }
     
-    protected void convertUpdateLastRunDuration() {
+    public void convertUpdateLastRunDuration() {
         totalDurationPastRun = new TimeConverter(filePath).getLastRunDurationMillis();
     }
     
-    protected List<String> getTestRunnerLogList() {
+    public List<String> getTestRunnerLogList() {
         return testRunnerLogList;
     }
 
-    protected Map<String, String> getConfigurationMap() {
+    public Map<String, String> getConfigurationMap() {
         return configurationMap;
     }
     
-    protected Map<String, List<Test>> getCategoryTestMap() {
+    public Map<String, List<Test>> getCategoryTestMap() {
         return categoryTestMap;
     }
     
-    protected Map<String, List<ExceptionInfo>> getExceptionTestMap() {
+    public Map<String, List<ExceptionInfo>> getExceptionTestMap() {
         return exceptionTestMap;
     }
     
-    protected SystemInfo getSystemInfo() {
+    public SystemInfo getSystemInfo() {
         return systemInfo;
     }
     
@@ -309,7 +309,7 @@ public abstract class Report extends LogSettings implements Serializable {
         return getSystemInfo().getInfo();
     }
 
-    protected void attach(IReporter reporter) {
+    public void attach(IReporter reporter) {
         if (reporters == null) {
             reporters = new ArrayList<IReporter>();
         }
@@ -318,12 +318,12 @@ public abstract class Report extends LogSettings implements Serializable {
         reporter.start(this);
     }
 
-    protected void detach(IReporter reporter) {
+    public void detach(IReporter reporter) {
         reporter.stop();
         reporters.remove(reporter);
     }
     
-    protected void finalizeTest(Test test) {
+    public void finalizeTest(Test test) {
         if (test.getEndedTime() == null) {
             test.setEndedTime(Calendar.getInstance().getTime());
         }
@@ -531,59 +531,59 @@ public abstract class Report extends LogSettings implements Serializable {
         }
     }
     
-    protected String getFilePath() {
+    public String getFilePath() {
         return filePath;
     }
     
-    protected void setReplaceExisting(Boolean replaceExisting) {
+    public void setReplaceExisting(Boolean replaceExisting) {
         this.replaceExisting = replaceExisting;
     }
     
-    protected Boolean getReplaceExisting() {
+    public Boolean getReplaceExisting() {
         return replaceExisting;
     }
     
-    protected void setDisplayOrder(DisplayOrder displayOrder) {
+    public void setDisplayOrder(DisplayOrder displayOrder) {
         this.displayOrder = displayOrder;
     }
     
-    protected DisplayOrder getDisplayOrder() {
+    public DisplayOrder getDisplayOrder() {
         return displayOrder;
     }
     
-    protected void setNetworkMode(NetworkMode networkMode) {
+    public void setNetworkMode(NetworkMode networkMode) {
         this.networkMode = networkMode;
     }
     
-    protected NetworkMode getNetworkMode() {
+    public NetworkMode getNetworkMode() {
         return networkMode;
     }
         
-    protected UUID getId() {
+    public UUID getId() {
         return reportId;
     }
 
-    protected LogStatus getStatus() {
+    public LogStatus getStatus() {
         return reportStatus;
     }
     
-    protected SuiteTimeInfo getSuiteTimeInfo() {
+    public SuiteTimeInfo getSuiteTimeInfo() {
         return suiteTimeInfo;
     }
     
-    protected void setStartedTime(long startTime) {
+    public void setStartedTime(long startTime) {
         suiteTimeInfo.setSuiteStartTimestamp(startTime);
     }
     
-    protected void setDocumentLocale(Locale locale) {
+    public void setDocumentLocale(Locale locale) {
         this.locale = locale;
     }
     
-    protected Locale getDocumentLocale() {
+    public Locale getDocumentLocale() {
         return locale;
     }
     
-    protected void setProjectName(String name) {
+    public void setProjectName(String name) {
         projectName = name;
     }
     
@@ -591,7 +591,7 @@ public abstract class Report extends LogSettings implements Serializable {
         return projectName;
     }
     
-    protected void setMongoDBObjectID(String id) {
+    public void setMongoDBObjectID(String id) {
         this.mongoDBID = id;
     }
     
