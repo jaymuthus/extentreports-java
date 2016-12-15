@@ -30,12 +30,21 @@
 		</#if>
 		
 		<link href='${protocol}://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
-		<link href='${protocol}://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.css' type='text/css' rel='stylesheet' />
+		<link href='${protocol}://cdn.rawgit.com/anshooarora/extentreports/8016a69ddb1d39913acfcee7e1b31e0b6661ccd6/cdn/extent.css' type='text/css' rel='stylesheet' />
 		
 		<style>
 			<#if report.configurationMap??>
 				${report.configurationMap["styles"]}
 			</#if>
+.subnav.container{padding-left:0px !important}
+.subnav .side-nav{width:auto !important;float:right;left:inherit;right: 4px;height:auto !important;padding-bottom:0px !important}
+.subnav .side-nav li{float:left !important;width:auto !important;} 
+.subnav .side-nav li a > font{display:none} 
+.subnav .side-nav li a > i{font-size:20px !important} 
+.subnav .subnavcnt{margin-top:64px;margin-left:0px !important; overflow:auto;height:695px;width:100%;float:left}   
+.progress{height:10px !important}  
+.subnav .subnavcnt ._addedCell1{width:33.3333% !important;float:left;height:auto !important}
+.subnav .subnavcnt ._addedCell2{width:66% !important;float:left;height:auto !important}
 		</style>
 	</head>
 	
@@ -45,49 +54,30 @@
 	</#if>
 	
 	<body class='extent default ${theme} hide-overflow'>
+				
+		<!-- container -->
+		<div class='container subnav'>
 		<!-- nav -->
-		<nav>
-			<div class='logo-container blue darken-2'>
-				<a class='logo-content' href='http://extentreports.relevantcodes.com'>
-					<span>ExtentReports</span>
-				</a>
-				<a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>
-			</div>
-			<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
-				<li class='analysis waves-effect active'><a href='#!' class='test-view' onclick="_updateCurrentStage(0)"><i class='mdi-action-dashboard'></i>${resourceBundle.getString("nav.menu.testDetails")}</a></li>
-				<#if report.categoryTestMap?? && (report.categoryTestMap?size != 0)>
-					<li class='analysis waves-effect'><a href='#!' class='categories-view' onclick="_updateCurrentStage(1)"><i class='mdi-maps-local-offer'></i>${resourceBundle.getString("nav.menu.categories")}</a></li>
+			<ul id='slide-out' class='side-nav fixed' style="top:0px !important;">
+				<li class='analysis waves-effect active'><a href='#!' class='dashboard-view'><i class='mdi-action-track-changes'></i></i><font>${resourceBundle.getString("nav.menu.analysis")}</font></a></li>
+				<#if report.testRunnerLogList?? && (report.testRunnerLogList?size != 0)>
+					<li class='analysis waves-effect'><a href='#!' class='testrunner-logs-view'><i class='mdi-action-assignment'></i>${resourceBundle.getString("nav.menu.testRunnerLogs")}</a></li>
 				</#if>
-				<#if report.exceptionTestMap?? && (report.exceptionTestMap?size != 0)>
-					<li class='analysis waves-effect'><a href='#!' class='exceptions-view' onclick="_updateCurrentStage(2)"><i class='mdi-action-bug-report'></i>${resourceBundle.getString("nav.menu.exceptions")}</a></li>
+				<#if report.categoryTestMap?? && (report.categoryTestMap?size != 0)>
+					<li class='analysis waves-effect'><a href='#!' class='categories-view' onclick="_updateCurrentStage(1)"><i class='mdi-maps-local-offer'></i><font>${resourceBundle.getString("nav.menu.categories")}</font></a></li>
 				</#if>
 				<li class='analysis waves-effect'>
-					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>${resourceBundle.getString("nav.menu.analysis")}</a>
+					<a href='#!' class='test-view' onclick="_updateCurrentStage(0)">
+						<i class='mdi-action-dashboard'></i><font>${resourceBundle.getString("nav.menu.testDetails")}</font></a>
 				</li>
-				<#if report.testRunnerLogList?? && (report.testRunnerLogList?size != 0)>
-					<li class='analysis waves-effect'><a href='#!' onclick="_updateCurrentStage(-1)" class='testrunner-logs-view'><i class='mdi-action-assignment'></i>${resourceBundle.getString("nav.menu.testRunnerLogs")}</a></li>
+				<#if report.exceptionTestMap?? && (report.exceptionTestMap?size != 0)>
+					<li class='analysis waves-effect'><a href='#!' class='exceptions-view' onclick="_updateCurrentStage(2)"><i class='mdi-action-bug-report'></i><font>${resourceBundle.getString("nav.menu.exceptions")}</font></a></li>
 				</#if>
 			</ul>
-			<span class='report-name'><#if report.configurationMap??>${report.configurationMap["reportName"]}</#if></span> <span class='report-headline'><#if report.configurationMap??>${report.configurationMap["reportHeadline"]}</#if></span>
-			<ul class='right hide-on-med-and-down nav-right'>
-				<li class='theme-selector' alt='${resourceBundle.getString("nav.menuright.themeSelectorMessage")}' title='${resourceBundle.getString("nav.menuright.themeSelectorMessage")}'>
-					<i class='mdi-hardware-desktop-windows'></i>
-				</li>
-				<li>
-					<span class='suite-started-time'>${.now?datetime?string(dateTimeFormat)}</span>
-				</li>
-				<li>
-					<span>v2.41.1</span>
-				</li>
-			</ul>
-		</nav>
 		<!-- /nav -->
-		
-		<!-- container -->
-		<div class='container'>
 			
 			<!-- dashboard -->
-			<div id='dashboard-view' class='row'>
+			<div id='dashboard-view' class='row subnavcnt'>
 				<div class='time-totals'>
 					<div class='col l2 m4 s6'>
 						<div class='card suite-total-tests'> 
@@ -101,18 +91,18 @@
 							<span class='total-steps'> <span class='panel-lead'></span> </span> 
 						</div> 
 					</div>
-					<div class='col l2 m4 s12'>
+					<div class='col m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>${resourceBundle.getString("dashboard.panel.name.totalTimeTaken.current")}</span> 
 							<span class='suite-total-time-current-value panel-lead'>${report.getRunDuration()}</span> 
 						</div> 
 					</div>
-					<div class='col l2 m4 s12'>
+					<!--<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>${resourceBundle.getString("dashboard.panel.name.totalTimeTaken.overall")}</span> 
 							<span class='suite-total-time-overall-value panel-lead'>${report.getRunDurationOverall()}</span> 
 						</div> 
-					</div>
+					</div>-->
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>${resourceBundle.getString("dashboard.panel.name.start")}</span> 
@@ -227,7 +217,7 @@
 			<!-- /dashboard -->
 			
 			<!-- tests -->
-			<div id='test-view' class='row _addedTable'>
+			<div id='test-view' class='row _addedTable subnavcnt'>
 				<div class='col _addedCell1'>
 					<div class='contents'>
 						<div class='card-panel heading'>
@@ -440,7 +430,7 @@
 			
 			<!-- categories -->
 			<#if report.categoryTestMap?? && (report.categoryTestMap?size != 0)>
-				<div id='categories-view' class='row _addedTable hide'>
+				<div id='categories-view' class='row _addedTable hide subnavcnt'>
 					<div class='col _addedCell1'>
 						<div class='contents'>
 							<div class='card-panel heading'>
@@ -537,7 +527,7 @@
 			
 			<!-- exceptions -->
 			<#if report.exceptionTestMap?? && (report.exceptionTestMap?size != 0)>
-				<div id='exceptions-view' class='row _addedTable hide'>
+				<div id='exceptions-view' class='row _addedTable hide subnavcnt'>
 					<div class='col _addedCell1'>
 						<div class='contents'>
 							<div class='card-panel heading'>
@@ -679,13 +669,22 @@
 		</div>
 		<!-- /filter for step status -->
 		
-		<script src='${protocol}://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.js' type='text/javascript'></script>
+		<script src='${protocol}://cdn.rawgit.com/anshooarora/extentreports/8016a69ddb1d39913acfcee7e1b31e0b6661ccd6/cdn/extent.js' type='text/javascript'></script>
 
 		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
 		<script>
 			<#if report.configurationMap??>
 				${report.configurationMap["scripts"]}
 			</#if>
+		</script>
+<script language="javascript">
+		     $(document).ready(function() {
+		         resetFilters(function() {
+                             $('#dashboard-view').removeClass('hide'); 
+                             $('#dashboard-view').addClass('show'); 
+                             $('#test-view').addClass('hide'); 
+                          });
+		      });
 		</script>
 	</body>
 </html>
