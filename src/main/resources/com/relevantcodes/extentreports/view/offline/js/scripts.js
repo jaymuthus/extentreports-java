@@ -343,7 +343,7 @@ $(window).keydown(function(e) {
 $('.step-filters').click(function(evt) {
     $('.details-container').find('tbody > tr').removeClass('displayed hide');
     
-    var cls = $(evt.target).parent().attr('status');
+    var cls = $(evt.target).parent().attr('class');
     if (cls.indexOf('clear') < 0) {
         $('.details-container').find('tbody > tr').removeClass('displayed hide');
 

@@ -36,15 +36,58 @@
 			<#if report.configurationMap??>
 				${report.configurationMap["styles"]}
 			</#if>
-.subnav.container{padding-left:0px !important}
-.subnav .side-nav{width:auto !important;float:right;left:inherit;right: 4px;height:auto !important;padding-bottom:0px !important}
-.subnav .side-nav li{float:left !important;width:auto !important;} 
-.subnav .side-nav li a > font{display:none} 
-.subnav .side-nav li a > i{font-size:20px !important} 
-.subnav .subnavcnt{margin-top:64px;margin-left:0px !important; overflow:auto;height:695px;width:100%;float:left}   
-.progress{height:10px !important}  
-.subnav .subnavcnt ._addedCell1{width:33.3333% !important;float:left;height:auto !important}
-.subnav .subnavcnt ._addedCell2{width:66% !important;float:left;height:auto !important}
+.subnav.container {
+	padding-left: 0px !important
+}
+.subnav .side-nav {
+	width: auto !important;
+	float: right;
+	left: inherit;
+	right: 4px;
+	height: auto !important;
+	padding-bottom: 0px !important
+}
+.subnav .side-nav li {
+	float: left !important;
+	width: auto !important;
+}
+.subnav .side-nav li a > font {
+	display: none
+}
+.subnav .side-nav li a > i {
+	font-size: 20px !important
+}
+.subnavcntmain {
+	margin-top: 64px !important;
+	margin-left: 0px !important;
+	overflow: auto;
+	height: 695px;
+	width: 100%;
+	float: left
+}
+.subnav .subnavcnt {
+	width: 100%;
+	float: left;
+	margin-bottom:15px;
+	display:table;	
+}
+.progress {
+	height: 10px !important
+}
+.subnav .subnavcnt ._addedCell1 {
+	width: 33.3333% !important;
+	float: left;
+	height: 100% !important;
+	overflow-y:auto;display:table-cell;background-color:#fff;float:none !important
+}
+.subnav .subnavcnt ._addedCell2 {
+	width: 66.4444% !important;
+	float: left;
+	height: 100% !important;
+	overflow-y:inherit !important;display:table-cell;background-color:#fff;float:none !important
+}
+._addedCell2 .contents{height:auto !important}
+._addedCell1 .contents{overflow-y:auto !important}
 		</style>
 	</head>
 	
@@ -53,10 +96,10 @@
 		<#assign theme = report.configurationMap["theme"]> 
 	</#if>
 	
-	<body class='extent default ${theme} hide-overflow'>
+	<body class='extent ${theme} hide-overflow'>
 				
 		<!-- container -->
-		<div class='container subnav'>
+		<div class='container subnav subnavcntmain'>
 		<!-- nav -->
 			<ul id='slide-out' class='side-nav fixed' style="top:0px !important;">
 				<li class='analysis waves-effect active'><a href='#!' class='dashboard-view'><i class='mdi-action-track-changes'></i></i><font>${resourceBundle.getString("nav.menu.analysis")}</font></a></li>
@@ -225,9 +268,7 @@
 						</div>
 						<div class='card-panel filters'>
 							<div>
-								<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
-									<i class='mdi-action-reorder'></i>
-								</a>
+								<a data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#' class='dropdown-button button tests-toggle'><i class='mdi-action-subject icon'></i></a>
 								<ul id='tests-toggle' class='dropdown-content'>
 									<li class='pass'><a href='#!'>Pass</a></li>
 									<li class='fail'><a href='#!'>Fail</a></li>
@@ -250,9 +291,7 @@
 							</div>
 							<#if report.categoryTestMap?? && report.categoryTestMap?size != 0>
 								<div>
-									<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
-										<i class='mdi-maps-local-offer'></i>
-									</a>
+									<a data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#' class='category-toggle dropdown-button button'><i class='mdi-maps-local-offer icon'></i></a>
 									<ul id='category-toggle' class='dropdown-content'>
 										<#list report.categoryTestMap?keys as category>
 											<li class='${category}'><a href='#!'>${category}</a></li>
@@ -263,27 +302,20 @@
 								</div>
 							</#if>
 							<div>
-								<a class='btn-floating btn-small waves-effect waves-light grey' id='clear-filters' alt='${resourceBundle.getString("tests.filters.clearFilters")}' title='${resourceBundle.getString("tests.filters.clearFilters")}'>
-									<i class='mdi-navigation-close'></i>
-								</a>
+								<a id='clear-filters' alt='${resourceBundle.getString("tests.filters.clearFilters")}' title='${resourceBundle.getString("tests.filters.clearFilters")}'><i class='mdi-navigation-close icon'></i></a>
 							</div>
 							<div>
-								<a class='btn-floating btn-small waves-effect waves-light grey' id='enableDashboard' alt='${resourceBundle.getString("tests.filters.enableDashboard")}' title='${resourceBundle.getString("tests.filters.enableDashboard")}'>
-									<i class='mdi-action-track-changes'></i>
-								</a>
+								<a id='enableDashboard' alt='${resourceBundle.getString("tests.filters.enableDashboard")}' title='${resourceBundle.getString("tests.filters.enableDashboard")}'><i class='mdi-action-track-changes icon'></i></a>
 							</div>
 							<div>
-								<a class='btn-floating btn-small waves-effect waves-light blue enabled' id='refreshCharts' alt='${resourceBundle.getString("tests.filters.refreshCharts")}' title='${resourceBundle.getString("tests.filters.refreshCharts")}'>
-									<i class='mdi-navigation-refresh'></i>
-								</a>
+								<a id='refreshCharts' alt='${resourceBundle.getString("tests.filters.refreshCharts")}' title='${resourceBundle.getString("tests.filters.refreshCharts")}' class='enabled'><i class='mdi-navigation-refresh icon'></i></i></a>
 							</div>
+							<div>&nbsp;&middot;</div>
 							<div class='search' alt='${resourceBundle.getString("tests.filters.searchTests")}' title='${resourceBundle.getString("tests.filters.searchTests")}'>
 								<div class='input-field left'>
 									<input id='searchTests' type='text' class='validate' placeholder='${resourceBundle.getString("tests.filters.searchTests")}...'>
 								</div>
-								<a href="#" class='btn-floating btn-small waves-effect waves-light grey'>
-									<i class='mdi-action-search'></i>
-								</a>
+								<i class='mdi-action-search icon'></i>
 							</div>
 						</div>
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
@@ -411,14 +443,14 @@
 						<div class='card-panel details-view'>
 							<h5 class='details-name'></h5>
 							<div class='step-filters right'>
-								<span class='btn-floating btn-small waves-effect waves-light blue' status='info' alt='info' title='info'><i class='mdi-action-info-outline'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light green' status='pass' alt='pass' title='pass'><i class='mdi-action-check-circle'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light red' status='fail' alt='fail' title='fail'><i class='mdi-navigation-cancel'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light red darken-4' status='fatal' alt='fatal' title='fatal'><i class='mdi-navigation-cancel'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light red lighten-2' status='error' alt='error' title='error'><i class='mdi-alert-error'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light orange' alt='warning' status='warning' title='warning'><i class='mdi-alert-warning'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light cyan' status='skip' alt='skip' title='skip'><i class='mdi-content-redo'></i></span>
-								<span class='btn-floating btn-small waves-effect waves-light grey darken-2' status='clear-step-filter' alt='Clear filters' title='Clear filters'><i class='mdi-content-clear'></i></span>
+								<span class='info' alt='info' title='info'><i class='mdi-action-info-outline'></i></span>
+								<span class='pass' alt='pass' title='pass'><i class='mdi-action-check-circle'></i></span>
+								<span class='fail' alt='fail' title='fail'><i class='mdi-navigation-cancel'></i></span>
+								<!--<span class='fatal' alt='fatal' title='fatal'><i class='mdi-navigation-cancel'></i></span>-->
+								<span class='error' alt='error' title='error'><i class='mdi-alert-error'></i></span>
+								<span class='warning' alt='warning' title='warning'><i class='mdi-alert-warning'></i></span>
+								<span class='skip' alt='skip' title='skip'><i class='mdi-content-redo'></i></span>
+								<span class='clear-step-filter' alt='Clear filters' title='Clear filters'><i class='mdi-content-clear'></i></span>
 							</div>
 							<div class='details-container'>
 							</div>
